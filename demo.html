@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="css/style.css" rel="stylesheet">-->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        <a href="javascript:;" class="butn-big">加大</a>
+        <a href="javascript:;" class="butn-small">缩小</a>
+    </p>
+    <p>
+        <a href="javascript:;" class="butn-rotate">旋转</a>
+        <a href="javascript:;" class="butn-origin" origin="center">中心</a>
+        <a href="javascript:;" class="butn-origin" origin="top left">左上</a>
+        <a href="javascript:;" class="butn-origin" origin="bottom right">右下</a>
+        <a href="javascript:;" class="butn-origin" origin="middle right">右中</a>
+    </p>
+    <script src="http://res.yy.com/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="http://yunzhongyue.oschina.io/craftyjs/release/0.8.0/crafty.js"></script>
+    <script>
+        Crafty.init();
+        var player = Crafty.e('2D, Canvas, Color')
+            .attr({
+                x: 100,
+                y: 100,
+                w: 100,
+                h: 100
+            }).color('red');
+        new Crafty.circle(300, 100, 20);
+        // 加大 
+        $('.butn-big').on('click', function () {
+            player.w *= 1.1;
+            player.h *= 1.1;
+        })
+        // 缩小
+        $('.butn-small').on('click', function () {
+            player.w *= 0.9;
+            player.h *= 0.9;
+        })
+        // 旋转
+        $('.butn-rotate').on('click', function () {
+            player.rotation -= 10;
+        })
+        $('.butn-origin').on('click', function () {
+            player.origin($(this).attr('origin'));
+        });
+        
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="./css/reveal.css">
+    <link rel="stylesheet" href="./css/black.css">
+    <style>
+        .ft26 {
+            font-size: 26px!important;
+        }
+
+        .reveal table th,
+        .reveal table td {
+            font-size: 26px;
+            color: #fff;
+        }
+        .reveal pre code{
+            max-height: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h4>craftyjs -- 一个游戏开发库</h4>
+                <ul>
+                    <li>相对其他游戏库，为什么要使用它呢?</li>
+                    <li>1、支持 dom  / canvas 两种渲染模式的灵活游戏开发库</li>
+                    <li>2、文件小(140kb)</li>
+                    <li>3、实体组件系统</li>
+                    <li>4、代码的风格比较像jquery容易入手</li>
+                </ul>
+
+            </section>
+            <section>
+                <section>
+                    <h4>简单的一个例子</h4>
+                    <pre>
+                        <code>       
+Crafty.init(); // 初始化 一个舞台
+// 创建一个实体 默认正方形
+Crafty.e('2D, Canvas, Color')
+    .attr({
+        x: 100,
+        y: 100,
+        w: 100,
+        h: 100
+    }).color('red');
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h5>具体实现</h5>
+                    <pre>
+                        <code>
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h4>状态模式</h4>
+                    <p class="ft26">Cookie是一种发送到客户浏览器的文本串句柄，并保存在客户机硬盘上，可以用来在某个Web站点会话之间持久地保持数据。</p>
+                    <div>
+                        <dl>
+                            <dt>优点</dt>
+                            <dd>可配置到期规则</dd>
+                            <dd>存储在客户端</dd>
+                        </dl>
+                        <dl>
+                            <dt>缺点</dt>
+                            <dd>大小受到限制</dd>
+                            <dd>不适合大量数据的存储，且会增加带宽</dd>
+                        </dl>
+                    </div>
+                </section>
+                <section>
+                    
+                </section>
+                <section>
+                    <p>path 必须是当前的url 下的 否则一般是写不了的 , domain 也要必须是当前的域名或者 顶级域名</p>
+                    <pre>
+                    <code>
+                        document.cookie = 'test=2;expires=222;path=/welcome;domain=.yy.com'
+                    </code>
+                    </pre>
+                </section>
+            </section>
+            <section class="stack">
+                <section>
+                    <h4>2、localStorage</h4>
+                    <ul>
+                        <li>1、没有时间限制的数据存储（ie8 +）</li>
+                        <li>2、localStorage的值类型只能是string类型</li>
+                        <li>3、相比于cookie可以节约带宽</li>
+                    </ul>
+                </section>
+                <section>
+                    <h4>2、localStorage-tesgt</h4>
+                </section>
+            </section>
+            <section>
+                <h4>3、sessionStorage</h4>
+            </section>
+            <section>
+                <h4>4、indexDb</h4>
+            </section>
+        </div>
+    </div>
+    <script src="js/reveal.js"></script>
+    <script>
+        Reveal.initialize();
+    </script>
+</body>
+
+</html>
