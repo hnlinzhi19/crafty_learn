@@ -13,7 +13,8 @@
             font-size: 26px;
             color: #fff;
         }
-        .reveal pre code{
+
+        .reveal pre code {
             max-height: 800px;
         }
     </style>
@@ -26,7 +27,7 @@
                 <h4>craftyjs -- 一个游戏开发库</h4>
                 <ul>
                     <li>相对其他游戏库，为什么要使用它呢?</li>
-                    <li>1、支持 dom  / canvas 两种渲染模式的灵活游戏开发库</li>
+                    <li>1、支持 dom / canvas 两种渲染模式的灵活游戏开发库</li>
                     <li>2、文件小(140kb)</li>
                     <li>3、实体组件系统</li>
                     <li>4、代码的风格比较像jquery容易入手</li>
@@ -35,7 +36,7 @@
             </section>
             <section>
                 <section>
-                    <h4>简单的一个例子</h4>
+                    <h4>实例生成及添加光标控制事件</h4>
                     <pre>
                         <code>       
 Crafty.init(); // 初始化 一个舞台
@@ -51,12 +52,104 @@ Crafty.e('2D, Canvas, Color')
                     </pre>
                 </section>
                 <section>
-                    <h5>具体实现</h5>
+                    <h3>将一个图片画入舞台</h3>
                     <pre>
-                        <code>
+                        <code>       
+var assetsObj = {
+    image: ['/img/bunny.png'],
+};
+// 加载资源
+Crafty.load(assetsObj, function () {
+    // 加载完成
+    var player = Crafty.e('2D,DOM, Image')
+        .attr({
+            w: 100,
+            h: 100,
+            x: Crafty.viewport.width / 2 -50,
+            y: Crafty.viewport.height / 2 - 50
+        })
+        .image("/img/bunny.png", "repeat").origin('center'); // 图片实例
+    
+        player.bind('EnterFrame', function () { //ticker
+            this.rotation += 1;
+        });
+
+
+}, function (params) { // 进度函数
+
+})
                         </code>
                     </pre>
                 </section>
+            </section>
+            <section>
+                <h3>图片精灵</h3>
+                <pre>
+                        <code>       
+var fish = Crafty.e('2D, Canvas, fish_start, SpriteAnimation'); // 实例化一条鱼
+fish.attr({
+    x: 200,
+    y: 300
+});
+
+fish.reel('move', 500, [
+    [0, 0],
+    [0, 1]
+]);
+fish.animate('move', -1);
+                        </code>
+                    </pre>
+            </section>
+            <section>
+                <h3>动画</h3>
+                <pre>
+                        <code>       
+fish.tween({x: 800, 2000, 'linear');
+                        </code>
+                    </pre>
+            </section>
+            <section>
+                <h3>碰撞</h3>
+                <pre>
+                        <code>       
+fish.onHit('block', function () {
+    speed = -4;
+});
+<!-- 或者-->
+fish.checkHits('block') // check for collisions with entities that have the Solid component in each frame
+.bind("HitOn", function(hitData) {
+    Crafty.log("Collision with Solid entity occurred for the first time.");
+})
+.bind("HitOff", function(comp) {
+    Crafty.log("Collision with Solid entity ended.");
+});
+                        </code>
+                    </pre>
+            </section>
+            <section>
+                <h5>重力感应</h5>
+                <pre>
+                        <code>
+Crafty.init();
+Crafty.e('ground, 2D, Canvas, Color')
+    .attr({
+        x: 0,
+        y: 600,
+        w: 400,
+        h: 10
+    }).color('green');
+var player = Crafty.e('2D, Canvas, Color,Twoway, Gravity')
+    .attr({
+        x: 100,
+        y: 100,
+        w: 100,
+        h: 100
+    }).color('red')
+    .twoway(100)
+    .gravityConst(200) // 重力系数
+    .gravity('ground');
+                        </code>
+                    </pre>
             </section>
             <section>
                 <section>
@@ -76,7 +169,7 @@ Crafty.e('2D, Canvas, Color')
                     </div>
                 </section>
                 <section>
-                    
+
                 </section>
                 <section>
                     <p>path 必须是当前的url 下的 否则一般是写不了的 , domain 也要必须是当前的域名或者 顶级域名</p>

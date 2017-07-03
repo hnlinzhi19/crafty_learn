@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>碰撞</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="css/style.css" rel="stylesheet">-->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="//res.yy.com/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="//yunzhongyue.oschina.io/craftyjs/release/0.8.0/crafty.js"></script>
+    <script>
+        Crafty.init();
+        var assetsObj = {
+            sprites: {
+                "/img/yu-2.png": {
+                    tile: 71,
+                    tileh: 42,
+                    map: {
+                        fish_start: [0, 0]
+                    }
+                }
+            }
+        };
+        // 加载资源
+        Crafty.load(assetsObj, function () {
+            var block = Crafty.e('block, 2D, Canvas,Color')
+                .attr({
+                    x: 800,
+                    y: 100,
+                    w: 10,
+                    h: 300
+                }).color('red');
+            // 加载完成
+            var fish = Crafty.e('2D, Canvas, fish_start, SpriteAnimation, Twoway, Tween, Collision'); // 实例化一条鱼
+            fish.attr({
+                x: 200,
+                y: 300,
+                dX: Crafty.math.randomInt(2, 5),
+                dY: Crafty.math.randomInt(2, 5)
+            }).twoway(200);
+            fish.reel('move', 500, [
+                [0, 0],
+                [0, 1]
+            ]);
+            fish.animate('move', -1);
+            // fish.tween({
+            //     x: 900
+            // }, 3000, 'linear');
+            console.log(fish);
+            let speed = 4;
+            fish.bind('EnterFrame', function () {
+                fish.x += speed;
+                if (fish.x < 100) {
+                    speed = 4;
+                }
+            });
+            fish.onHit('block', function () {
+                speed = -4;
+            });
+
+
+        }, function (params) { // 进度函数
+
+        })
+    </script>
+
+</body>
+
+</html>

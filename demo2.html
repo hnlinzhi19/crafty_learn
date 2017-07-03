@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>重力</title>
+    <title>图片加载</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<link href="css/style.css" rel="stylesheet">-->
@@ -20,23 +20,29 @@
     <script src="//yunzhongyue.oschina.io/craftyjs/release/0.8.0/crafty.js"></script>
     <script>
         Crafty.init();
-        Crafty.e('ground, 2D, Canvas, Color')
-            .attr({
-                x: 0,
-                y: 600,
-                w: 600,
-                h: 10
-            }).color('green');
-        var player = Crafty.e('2D, Canvas, Color, Gravity, Twoway')
-            .attr({
-                x: 100,
-                y: 100,
-                w: 100,
-                h: 100,
-                dx: 1,
-                dy: 1
-            }).color('red')
-            .gravity('ground');
+        var assetsObj = {
+            image: ['/img/bunny.png'],
+        };
+        // 加载资源
+        Crafty.load(assetsObj, function () {
+            // 加载完成
+            var player = Crafty.e('2D,DOM, Image')
+                .attr({
+                    w: 100,
+                    h: 100,
+                    x: Crafty.viewport.width / 2 -50,
+                    y: Crafty.viewport.height / 2 - 50
+                })
+                .image("/img/bunny.png", "repeat").origin('center'); // 图片实例
+            
+                player.bind('EnterFrame', function () { //ticker
+                    this.rotation += 1;
+                });
+
+
+        }, function (params) { // 进度函数
+
+        })
     </script>
 
 </body>
