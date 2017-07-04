@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>小鸟bird</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="css/style.css" rel="stylesheet">-->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #canvas{
+            width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas"></div>
+    <script src="//res.yy.com/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="//yunzhongyue.oschina.io/craftyjs/release/0.8.0/crafty.js"></script>
+    <script src="/js/state-init.js"></script>
+    <script src="/js/state-game.js"></script>
+    <script>
+        Crafty.init(500,600, document.getElementById('canvas'));
+        Crafty.scene('init', init);
+        Crafty.scene('game', game);
+        
+        var assetsObj = {
+            image: ['/img/bird/sky.png','/img/bird/background (6).png','/img/bunny.png'],
+            sprites: {
+                '/img/bird/background (6).png': {
+                    tile: 300,
+                    tile: 78,
+                    map: {
+                        gameStart: [0,0],
+                        gameOver: [0,1]
+                    }
+                }
+            }
+        };
+        // 加载资源
+        Crafty.load(assetsObj, function () {
+            Crafty.scene('init');
+        });
+    </script>
+
+</body>
+
+</html>

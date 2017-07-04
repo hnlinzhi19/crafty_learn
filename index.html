@@ -152,52 +152,25 @@ var player = Crafty.e('2D, Canvas, Color,Twoway, Gravity')
                     </pre>
             </section>
             <section>
-                <section>
-                    <h4>状态模式</h4>
-                    <p class="ft26">Cookie是一种发送到客户浏览器的文本串句柄，并保存在客户机硬盘上，可以用来在某个Web站点会话之间持久地保持数据。</p>
-                    <div>
-                        <dl>
-                            <dt>优点</dt>
-                            <dd>可配置到期规则</dd>
-                            <dd>存储在客户端</dd>
-                        </dl>
-                        <dl>
-                            <dt>缺点</dt>
-                            <dd>大小受到限制</dd>
-                            <dd>不适合大量数据的存储，且会增加带宽</dd>
-                        </dl>
-                    </div>
-                </section>
-                <section>
+                <h4>场景切换</h4>
+                <pre>
+                        <code>
+                // 注册 init场景
+Crafty.scene('init', function () {
+    Crafty.background('red');
+});
+// 注册error场景
+Crafty.scene('error', function () {
+    Crafty.background('green');
+});
 
-                </section>
-                <section>
-                    <p>path 必须是当前的url 下的 否则一般是写不了的 , domain 也要必须是当前的域名或者 顶级域名</p>
-                    <pre>
-                    <code>
-                        document.cookie = 'test=2;expires=222;path=/welcome;domain=.yy.com'
-                    </code>
+Crafty.scene('init');
+
+    Crafty.e("Delay").delay(function () {
+    Crafty.scene('error');
+    }, 5000, 1)
+         </code>
                     </pre>
-                </section>
-            </section>
-            <section class="stack">
-                <section>
-                    <h4>2、localStorage</h4>
-                    <ul>
-                        <li>1、没有时间限制的数据存储（ie8 +）</li>
-                        <li>2、localStorage的值类型只能是string类型</li>
-                        <li>3、相比于cookie可以节约带宽</li>
-                    </ul>
-                </section>
-                <section>
-                    <h4>2、localStorage-tesgt</h4>
-                </section>
-            </section>
-            <section>
-                <h4>3、sessionStorage</h4>
-            </section>
-            <section>
-                <h4>4、indexDb</h4>
             </section>
         </div>
     </div>
