@@ -1,7 +1,36 @@
+var vH = Crafty.viewport.height;
+var vW = Crafty.viewport.width;
+var pipeSpeed = 2;
+function createG () {
+    Crafty.e('Solid, 2D,Canvas, Image')
+        .attr({
+            x: Crafty.viewport.width,
+            y: 0,
+            w: 62,
+            h: 300
+        }).image('/img/up_mod.png', 'repeat')
+        .bind('EnterFrame', function () {
+            this.x -= pipeSpeed;
+        })
+    
+    Crafty.e('Solid, 2D, Canvas, Image')
+        .attr({
+            x:Crafty.viewport.width,
+            y: 300,
+            w: 62,
+            h: 60
+        }).image('/img/up_pipe.png').bind('EnterFrame', function () {
+            this.x -= pipeSpeed;
+        });
+    
+}
+
 function game() {
     console.log('start');
     Crafty.background('none');
-    var x = 0;
+    var startTime = +new Date();
+    var timer = null;
+
     var bg = Crafty.e('2D, Canvas, Image')
         .attr({
             x: 0,
@@ -14,56 +43,74 @@ function game() {
                 bg.x = 0;
                 return;
             }
-            bg.x -= 2;
+            bg.x -= pipeSpeed;
         })
-    var floorBg = Crafty.e('floor,2D, DOM, Color').attr({
+    var floorBg = Crafty.e('floor,2D, DOM').attr({
         x: 0,
-        y: 400,
+        y: 2000,
         w: 500,
         h: 10
-    }).color('#F00');
-    var birdSpeed = 2;
-    var nowY = 0;
-    var bird = Crafty.e('2D, Canvas, birdStart, SpriteAnimation,Keyboard, Gravity')
+    });
+    var bird = Crafty.e('2D, Canvas, birdStart, SpriteAnimation,Keyboard, Gravity,Jumper, Collision')
         .attr({
             x: 20,
             y: 200,
             w: 40,
             h: 30
-        }).reel('playing', 500, [
-            [0, 0],
-            [0, 1]
+        }).reel('downing', 500, [
+            [0, 2],
+            [0, 3]
         ])
-        .animate('playing', -1)
+        .checkHits('Solid')
+        .animate('downing', -1)
         .origin('center')
         .gravity('floor')
+        .jumpSpeed(100)
         .bind('EnterFrame', function () {
-            // if (bird.getReel().id != 'dowing' && birdSpeed > 0) {
-            //     bird.pauseAnimation().reel('dowing', 500, [
-            //         [0, 2],
-            //         [0, 3]
-            //     ]).animate('dowing', -1);
-            // }
-            // if (bird.getReel().id != 'uping' && birdSpeed < 0) {
-            //     bird.pauseAnimation().reel('uping', 500, [
-            //         [0, 4],
-            //         [0, 5]
-            //     ]).animate('uping', -1);
-            // }
-            if (this.isDown('SPACE')){
+            var diffTime = (+new Date()) - startTime;
+            if (this.isDown('SPACE') && diffTime > 200 && pipeSpeed) {
                 floorBg.y = bird.y + 30;
+                startTime = +new Date();
             }
-            // bird.y += birdSpeed;
-        }).bind("CheckLanding", function(ground) {
-            
-        });
-    
-        // console.log(ground);
-        // if (bird.getReel().id != 'uping') {
-        //     bird.pauseAnimation().reel('uping', 500, [
-        //         [0, 4],
-        //         [0, 5]
-        //     ]).animate('uping', -1);
-        // }
+        if (this.y > Crafty.viewport.height){
+            console.log('game over');
+             Crafty.scene('over');
+        }
+        }).bind("LandedOnGround", function (ground) {
+            this.jump()
+            if (this.getReel().id != 'uping') {
+                this.pauseAnimation().reel('uping', 300, [
+                    [0, 4],
+                    [0, 5]
+                ]).animate('uping', -1);
+            }
+        }).bind("CheckJumping", function (ground) {
+            if (ground) {
+                floorBg.y = 2000;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    if (bird.getReel().id != 'downing') {
+                        bird.pauseAnimation().reel('downing', 500, [
+                            [0, 2],
+                            [0, 3]
+                        ]).animate('downing', -1);
+                    }
+                }, 300);
+            }
+        }).bind("HitOn", function(hitData) {
+            if (hitData) {
+                // console.log(hitData);
+                pipeSpeed = 0;
+                this.gravityConst('3000');
+                if (bird.getReel().id != 'downing') {
+                    bird.pauseAnimation().reel('downing', 500, [
+                        [0, 2],
+                        [0, 3]
+                    ]).animate('downing', -1);
+                }
+                // Crafty.stop();
+            }
+        })
+    createG();
 
 }
