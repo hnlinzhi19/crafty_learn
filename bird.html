@@ -29,14 +29,26 @@
         Crafty.scene('game', game);
         
         var assetsObj = {
-            image: ['/img/bird/sky.png','/img/bird/background (6).png','/img/bunny.png'],
+            image: ['/img/bg.jpg','/img/bunny.png'],
             sprites: {
-                '/img/bird/background (6).png': {
-                    tile: 300,
-                    tile: 78,
+                '/img/birds.png': {
+                    tile: 40,
+                    tileh: 30,
                     map: {
-                        gameStart: [0,0],
-                        gameOver: [0,1]
+                        birdStart: [0,0],
+                        birdEnd: [0,1],
+                        dowStart:[0,2],
+                        upStart:[0,4]
+                    }
+                },
+                '/img/butns.png':{
+                    tile: 85,
+                    tileh: 28,
+                    map:{
+                        butnStart: [0,0],
+                        butnSubmit: [0,1],
+                        butnScore: [0,2],
+                        butnOk: [0,3],
                     }
                 }
             }
