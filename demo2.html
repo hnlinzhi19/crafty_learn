@@ -21,7 +21,7 @@
     <script>
         Crafty.init();
         var assetsObj = {
-            image: ['/img/bunny.png'],
+            image: ['./img/bunny.png'],
         };
         // 加载资源
         Crafty.load(assetsObj, function () {
@@ -33,7 +33,7 @@
                     x: Crafty.viewport.width / 2 -50,
                     y: Crafty.viewport.height / 2 - 50
                 })
-                .image("/img/bunny.png", "repeat").origin('center'); // 图片实例
+                .image("./img/bunny.png", "repeat").origin('center'); // 图片实例
             
                 player.bind('EnterFrame', function () { //ticker
                     this.rotation += 1;

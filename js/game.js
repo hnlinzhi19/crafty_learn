@@ -133,10 +133,10 @@ Crafty.scene('init', init); // 注册一个场景
 
 const assets = {
     // 图片资源
-    images: ['/img/bg.png'],
+    images: ['./img/bg.png'],
     // 精灵
     sprites: {
-        '/img/yu-2.png': {
+        './img/yu-2.png': {
             tile: 71, // 单个精灵图片的 宽度
             tileh: 42, // 单个精灵的 高度
             map: {
@@ -151,7 +151,7 @@ const assets = {
 }
 // 加装资源
 Crafty.load(assets, () => {
-    Crafty.background('#43d8dc url(/img/bg.png) no-repeat center center');
+    Crafty.background('#43d8dc url(./img/bg.png) no-repeat center center');
     document.querySelector('#cr-stage').style.backgroundSize = '100%';
     Crafty.scene('init');
 });

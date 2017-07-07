@@ -8,7 +8,7 @@ function createG () {
             y: 0,
             w: 62,
             h: 300
-        }).image('/img/up_mod.png', 'repeat')
+        }).image('./img/up_mod.png', 'repeat')
         .bind('EnterFrame', function () {
             this.x -= pipeSpeed;
         })
@@ -19,7 +19,7 @@ function createG () {
             y: 300,
             w: 62,
             h: 60
-        }).image('/img/up_pipe.png').bind('EnterFrame', function () {
+        }).image('./img/up_pipe.png').bind('EnterFrame', function () {
             this.x -= pipeSpeed;
         });
     
@@ -37,7 +37,7 @@ function game() {
             y: 0,
             w: 2 * Crafty.viewport.width,
             h: Crafty.viewport.height
-        }).image('/img/bg.jpg', 'repeat')
+        }).image('./img/bg.jpg', 'repeat')
         .bind('EnterFrame', function () {
             if (bg.x <= -Crafty.viewport.width) {
                 bg.x = 0;

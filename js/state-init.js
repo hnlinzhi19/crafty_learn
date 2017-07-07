@@ -1,7 +1,7 @@
 function init() {
     const CANVAS_IMAGE = '2D, DOM, Image';
     console.log('init');
-    Crafty.background('url(/img/bg.jpg) ');
+    Crafty.background('url(./img/bg.jpg) ');
     Crafty.e('2D, Canvas, birdStart, SpriteAnimation')
         .attr({
             x: Crafty.viewport.width / 2 - 20,
