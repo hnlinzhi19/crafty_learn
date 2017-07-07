@@ -36,7 +36,7 @@
             </section>
             <section>
                 <section>
-                    <h4>实例生成及添加光标控制事件</h4>
+                    <h4>实例生成及添加光标控制事件 <a href="/demo.html" target="_blank">demo</a></h4>
                     <pre>
                         <code>       
 Crafty.init(); // 初始化 一个舞台
@@ -52,7 +52,7 @@ Crafty.e('2D, Canvas, Color')
                     </pre>
                 </section>
                 <section>
-                    <h3>将一个图片画入舞台</h3>
+                    <h3>将一个图片画入舞台 <a href="/demo2.html" target="_blank">demo</a></h3>
                     <pre>
                         <code>       
 var assetsObj = {
@@ -83,7 +83,7 @@ Crafty.load(assetsObj, function () {
                 </section>
             </section>
             <section>
-                <h3>图片精灵</h3>
+                <h3>图片精灵 <a href="/demo4.html" target="_blank">demo</a></h3>
                 <pre>
                         <code>       
 var fish = Crafty.e('2D, Canvas, fish_start, SpriteAnimation'); // 实例化一条鱼
@@ -101,15 +101,15 @@ fish.animate('move', -1);
                     </pre>
             </section>
             <section>
-                <h3>动画</h3>
+                <h3>动画 <a href="/demo5.html" target="_blank">demo</a></h3>
                 <pre>
                         <code>       
-fish.tween({x: 800, 2000, 'linear');
+fish.tween({x: 800}, 2000, 'linear');
                         </code>
                     </pre>
             </section>
             <section>
-                <h3>碰撞</h3>
+                <h3>碰撞 <a href="/demo6.html" target="_blank">demo</a></h3>
                 <pre>
                         <code>       
 fish.onHit('block', function () {
@@ -127,7 +127,7 @@ fish.checkHits('block') // check for collisions with entities that have the Soli
                     </pre>
             </section>
             <section>
-                <h5>重力感应</h5>
+                <h5>重力感应<a href="/demo7.html" target="_blank">demo</a></h5>
                 <pre>
                         <code>
 Crafty.init();
@@ -152,7 +152,7 @@ var player = Crafty.e('2D, Canvas, Color,Twoway, Gravity')
                     </pre>
             </section>
             <section>
-                <h4>场景切换</h4>
+                <h4>场景切换 <a href="/demo8.html" target="_blank">demo</a></h4>
                 <pre>
                         <code>
                 // 注册 init场景
@@ -171,6 +171,10 @@ Crafty.scene('init');
     }, 5000, 1)
          </code>
                     </pre>
+            </section>
+            <section>
+                <h4>F&Q</h4>
+                <p>多谢大家</p>
             </section>
         </div>
     </div>
